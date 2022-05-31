@@ -1,0 +1,8 @@
+<form action="{% url 'generate_numbers' %}" method="post">
+    
+    {% csrf_token %}
+    {{ form.as_p}}    
+    
+    <input type="submit" value="Salvar">
+</form>
+
