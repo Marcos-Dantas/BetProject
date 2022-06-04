@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from core.forms import TicketForm
-import random
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+from core.models import Ticket
 
 def response_pdf(new_ticket):
     response = HttpResponse(content_type='application/pdf')
@@ -29,16 +29,17 @@ def response_pdf(new_ticket):
 def homepage_view(request):  
     return render(request, 'base.html', context={'form': TicketForm()})
 
-def generate_numbers(request):
+def generate_ticket(request):
     form = TicketForm(request.POST)
     if form.is_valid():
-        cont_numbers = int(request.POST.get('cont_numbers'))
-        numbers = random.sample(range(100), cont_numbers)
+        numbers = Ticket.generate_numbers( int( request.POST.get('cont_numbers')))
         new_ticket = form.save(commit=False)
         new_ticket.list_numbers = {'numbers': numbers}
         new_ticket.save()
 
         return response_pdf(new_ticket)
+    else:
+        return render(request, 'base.html', context={'form': form})
 
     return render(request, 'result.html', context={'ticket': False})
 
