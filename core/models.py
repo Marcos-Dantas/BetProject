@@ -4,7 +4,7 @@ import random
 
 class Ticket(models.Model):
     name = models.CharField('Nome', max_length=100)
-    cpf = models.CharField('CPF', max_length=11)
+    cpf = models.CharField('CPF', max_length=14)
     age = models.IntegerField('Idade')
     cont_numbers = models.IntegerField('Quantidade de Numeros')
     list_numbers = models.JSONField()
@@ -16,8 +16,10 @@ class Ticket(models.Model):
         verbose_name_plural = 'Tickets'
     
     def get_formated_numbers(self):
-        """
-            retorna o valor da lista de numeros gerados, como uma string
+        """retorna o valor do campo list_numbers formatado, como uma string.         
+
+        :self? e uma instancia de Ticket 
+		:retorna? uma string contendo todos os numeros do campo list_numbers divididos por virgula
         """
         numbers = list( self.list_numbers.values())[0]
         string_ints = [str(num) for num in numbers]
@@ -26,15 +28,19 @@ class Ticket(models.Model):
         return str_of_ints
     
     def generate_numbers(cont_numbers):
-        """
-            gerar numeros randomicos e retorna uma lista
+        """gerar numeros randomicos e retorna esses numeros numa lista.
+
+        :cont_numbers? e a quantidade de numeros que devem ser geradas randomicamente
+        :retorna? uma lista de numeros gerados de forma aleatoria
         """
         numbers = random.sample(range(1,80), cont_numbers)      
         return numbers
 
     def get_formated_date(self):
-        """
-            pegar valor da data no formato correto
+        """retorna o valor do campo create_date no formato correto.
+
+        :self? e uma instancia de Ticket
+        :retorna? um o valor do campo do tipo datetime no formato dd/mm/aaaa h:m:s
         """
         return self.create_date.strftime('%d/%m/%Y %H:%M:%S')
  

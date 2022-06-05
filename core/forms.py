@@ -22,18 +22,18 @@ class TicketForm(forms.ModelForm):
                 'Informe um nome válido.'
             ])
         
-        return self.cleaned_data
+        return name
 
     def clean_cpf(self):
-        cpf = self.cleaned_data.get('cpf')      
-
+        cpf = self.cleaned_data.get('cpf')     
+       
         # verificar se o cpf esta no padrão correto NNN.NNN.NNN-NN 
         if not re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf):
             self._errors['cpf'] = self.error_class([
                 'Informe um cpf válido.'
             ])
 
-            return self.cleaned_data
+            return cpf
 
         
         numbers = [int(digit) for digit in cpf if digit.isdigit()]
@@ -59,8 +59,8 @@ class TicketForm(forms.ModelForm):
             self._errors['cpf'] = self.error_class([
                 'Informe um cpf válido.'
             ])  
-    
-        return self.cleaned_data
+
+        return cpf
 
     def clean_age(self):
         age = self.cleaned_data.get('age')
@@ -70,7 +70,7 @@ class TicketForm(forms.ModelForm):
                 'Informe uma idade válida.'
             ])
 
-        return self.cleaned_data
+        return age
 
     def clean_cont_numbers(self):
         cont_numbers = self.cleaned_data.get('cont_numbers')
@@ -80,4 +80,4 @@ class TicketForm(forms.ModelForm):
                 'Informe um valor válido.'
             ])
 
-        return self.cleaned_data
+        return cont_numbers
