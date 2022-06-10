@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<center style="padding:200px">
+    <form action="{% url 'generate_ticket' %}" method="post">
+    
+        {% csrf_token %}
+        {{ form.as_p}}    
+        
+        <input type="submit" value="Salvar">
+    </form>    
+</center>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'core/js/jquery.min.js' %}"></script>
+    <script src="{% static 'core/js/jquery.mask.min.js' %}"></script>
+{% endblock %}

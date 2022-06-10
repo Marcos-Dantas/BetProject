@@ -27,7 +27,7 @@ def response_pdf(new_ticket):
     return response
 
 def homepage_view(request):  
-    return render(request, 'base.html', context={'form': TicketForm()})
+    return render(request, 'home.html', context={'form': TicketForm()})
 
 def generate_ticket(request):
     form = TicketForm(request.POST)
@@ -39,7 +39,7 @@ def generate_ticket(request):
 
         return response_pdf(new_ticket)
     else:
-        return render(request, 'base.html', context={'form': form})
+        return render(request, 'home.html', context={'form': form})
 
     return render(request, 'result.html', context={'ticket': False})
 

@@ -1,9 +1,22 @@
-<center style="padding:200px">
-    <form action="{% url 'generate_ticket' %}" method="post">
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- <link href="{% static 'assets/css/m3-style.css' %}" rel="stylesheet"> -->
+    <link rel="preload" href="{% static 'core/js/jquery.min.js' %}" as="script">
+    <link rel="preload" href="{% static 'core/js/jquery.mask.min.js' %}" as="script">    
+
+    <title>{% block title %}{% endblock %}</title>
+    <script> {% block style %}{% endblock %} </script>
+  </head>
+  <body >
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>  
     
-        {% csrf_token %}
-        {{ form.as_p}}    
-        
-        <input type="submit" value="Salvar">
-    </form>    
-</center>
+    {% block script %}
+      <script> </script>
+    {% endblock %}
+  </body>
+</html>
