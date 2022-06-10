@@ -11,6 +11,7 @@ class TicketForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['name'].required = False
         self.fields['cpf'].required = False
+        self.fields['cpf'].widget.attrs['data-mask'] = '000.000.000-00'
         self.fields['age'].required = False
         self.fields['cont_numbers'].required = False
     
@@ -69,6 +70,10 @@ class TicketForm(forms.ModelForm):
             self._errors['age'] = self.error_class([
                 'Informe uma idade válida.'
             ])
+        elif age < 18:
+            self.errors['age'] = self.error_class([
+                'É necessario ser maior de idade para gerar um bilhete.'
+            ])    
 
         return age
 
