@@ -20,7 +20,6 @@ class TestForms(SimpleTestCase):
             'cpf': '616.064.683-40',
             'age': 18,
             'cont_numbers': 5
-        })
-        print(form.errors)        
+        })   
         self.assertTrue(form.is_valid())
         self.assertEquals(len(form.errors), 0)
