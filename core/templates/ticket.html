@@ -1,0 +1,22 @@
+{% load static %}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+        {% include "pdfstylefonts.css" %}
+    </style>
+    <link rel='stylesheet' href='{% static "core/pdfstyle.css" %}'/>
+</head>
+<body>
+    <h1> Ticket Loteria Brazil</h1>
+
+    <h5>Nome: {{new_ticket.name}} </h5>
+    <h5>CPF: {{new_ticket.age}} </h5>
+    <h5>Idade: {{new_ticket.age}} </h5>
+    <h5>Quantidade de Numeros: {{new_ticket.cont_numbers}} </h5>
+    <h5>Numeros: {{new_ticket.get_formated_numbers}} </h5>
+    <h5>Data de Criação: {{new_ticket.get_formated_date}} </h5>
+
+</body>
+</html>
